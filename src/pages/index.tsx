@@ -79,9 +79,9 @@ export default function Home({ apiKey }: { apiKey: string }) {
         <meta httpEquiv="Content-Type" content="text/html; charset=utf-8" />
       </Head>
 
-      <div className="mx-auto ">
+      <div className="mx-auto">
         {/* Title */}
-        <div className="flex flex-col items-center justify-center py-6 mb-4">
+        <div className="flex flex-col items-center justify-center my-6">
           <h1 className="text-center font-black md:flex-row lg:tracking-tight text-2xl xl:text-4xl">
             <span
               className="before:absolute before:-z-10 before:text-black before:content-[attr(data-text)]"
@@ -112,7 +112,7 @@ export default function Home({ apiKey }: { apiKey: string }) {
             </span>
           </h1>
         </div>
-        <h3 className="text-center text-gray-500 mb-4 mx-auto">
+        <h3 className="text-center text-gray-500 text-sm md:text-base mb-2 mx-8">
           You can use this tool to generate your answer for the job application
           question such as "Why are you interested in this position?" or "Why
           should we hire you?" etc.
@@ -171,7 +171,7 @@ export default function Home({ apiKey }: { apiKey: string }) {
               <textarea
                 id="jobDescription"
                 placeholder="Job Description"
-                className="shadow appearance-none border rounded w-full py-2 px-3 h-64 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                className="shadow appearance-none border rounded w-full py-2 px-3 h-48 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                 value={jobDescription}
                 onChange={(e) => setJobDescription(e.target.value)}
               />
