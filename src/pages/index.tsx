@@ -114,8 +114,8 @@ export default function Home({ apiKey }: { apiKey: string }) {
         </div>
         <h3 className="text-center text-gray-500 mb-4 mx-auto">
           You can use this tool to generate your answer for the job application
-          question such as "Why do you want to work for us?" or "Why do you want
-          to work for this company?"...etc.
+          question such as "Why are you interested in this position?" or "Why
+          should we hire you?" etc.
         </h3>
         <div className="mx-auto flex md:flex-row flex-col justify-center">
           <form
