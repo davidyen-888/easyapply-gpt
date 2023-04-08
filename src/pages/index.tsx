@@ -18,6 +18,7 @@ export default function Home({ apiKey }: { apiKey: string }) {
   const [prompt, setPrompt] = useState("");
   const [reply, setReply] = useState("");
   const [copied, setCopied] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const handleCopy = () => {
     navigator.clipboard.writeText(reply);
@@ -26,6 +27,7 @@ export default function Home({ apiKey }: { apiKey: string }) {
   };
 
   const getAnswer = () => {
+    setLoading(true);
     // Call OpenAI API
     fetch("https://api.openai.com/v1/completions", {
       method: "POST",
@@ -52,6 +54,9 @@ export default function Home({ apiKey }: { apiKey: string }) {
       })
       .catch((error) => {
         console.error(error);
+      })
+      .finally(() => {
+        setLoading(false);
       });
   };
 
@@ -211,12 +216,20 @@ export default function Home({ apiKey }: { apiKey: string }) {
               >
                 Your answer
               </label>
-              <p
-                id="reply"
-                className="shadow appearance-none border rounded w-full h-96 px-3 py-10 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-              >
-                {reply}
-              </p>
+              {/* if loading, spinner else show reply  */}
+              {loading ? (
+                // spinner
+                <div className="flex justify-center">
+                  <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-gray-900"></div>
+                </div>
+              ) : (
+                <p
+                  id="reply"
+                  className="shadow appearance-none border rounded w-full h-96 px-3 py-10 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                >
+                  {reply}
+                </p>
+              )}
               {reply && (
                 <button
                   className="absolute right-0 top-0 mr-10 mt-16 cursor-pointer focus:outline-none"
