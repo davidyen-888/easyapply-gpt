@@ -2,15 +2,7 @@ import Footer from "@/components/Footer";
 import Head from "next/head";
 import { useState } from "react";
 import { MdContentCopy } from "react-icons/md";
-
-export async function getStaticProps() {
-  const apiKey = process.env.OPENAI_API_KEY;
-  return {
-    props: {
-      apiKey,
-    },
-  };
-}
+import { getOpenAIAnswer } from "./api/openai";
 
 export default function Home({ apiKey }: { apiKey: string }) {
   const [jobTitle, setJobTitle] = useState("Frontend Developer");
@@ -28,43 +20,26 @@ export default function Home({ apiKey }: { apiKey: string }) {
     setTimeout(() => setCopied(false), 1500);
   };
 
-  const getAnswer = () => {
+  const handleGenerateAnswer = async () => {
     setLoading(true);
-    // Call OpenAI API
-    fetch("https://api.openai.com/v1/completions", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${apiKey}`,
-      },
-      body: JSON.stringify({
-        model: "text-davinci-003",
-        prompt: `I am applying for the ${jobTitle} position at ${company}. Answer the question :${prompt} for me within 100 characters. The job description is: ${jobDescription}.`,
-        max_tokens: 100,
-        temperature: 0.6,
-        top_p: 1,
-        n: 1,
-        stream: false,
-        logprobs: null,
-      }),
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        let dataReply = data.choices[0].text;
-        setReply(dataReply);
-        console.log(dataReply);
-      })
-      .catch((error) => {
-        console.error(error);
-      })
-      .finally(() => {
-        setLoading(false);
-      });
+    try {
+      const dataReply = await getOpenAIAnswer(
+        `I am applying for the ${jobTitle} position at ${company}. Answer the question :${prompt} for me within 100 characters. The job description is: ${jobDescription}.`,
+        100,
+        0.6
+      );
+      setReply(dataReply);
+      // console.log(dataReply);
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setLoading(false);
+    }
   };
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    getAnswer();
+    handleGenerateAnswer();
   };
 
   return (
