@@ -1,3 +1,4 @@
+import Footer from "@/components/Footer";
 import Head from "next/head";
 import { useState } from "react";
 import { MdContentCopy } from "react-icons/md";
@@ -13,6 +14,7 @@ export async function getStaticProps() {
 
 export default function Home({ apiKey }: { apiKey: string }) {
   const [jobTitle, setJobTitle] = useState("Frontend Developer");
+  const [showOtherOption, setShowOtherOption] = useState(false);
   const [company, setCompany] = useState("");
   const [jobDescription, setJobDescription] = useState("");
   const [prompt, setPrompt] = useState("");
@@ -83,8 +85,7 @@ export default function Home({ apiKey }: { apiKey: string }) {
         <meta name="robots" content="index, follow" />
         <meta httpEquiv="Content-Type" content="text/html; charset=utf-8" />
       </Head>
-
-      <div className="mx-auto">
+      <main>
         {/* Title */}
         <div className="flex flex-col items-center justify-center my-6">
           <h1 className="text-center font-black md:flex-row lg:tracking-tight text-2xl xl:text-4xl">
@@ -137,7 +138,10 @@ export default function Home({ apiKey }: { apiKey: string }) {
               <select
                 id="jobTitle"
                 className="w-full h-10 px-3 text-base placeholder-gray-600 border rounded-lg focus:shadow-outline"
-                onChange={(e) => setJobTitle(e.target.value)}
+                onChange={(e) => {
+                  setJobTitle(e.target.value);
+                  setShowOtherOption(e.target.value === "Other");
+                }}
               >
                 <option value="Frontend Developer">Frontend Developer</option>
                 <option value="Backend Developer">Backend Developer</option>
@@ -146,7 +150,19 @@ export default function Home({ apiKey }: { apiKey: string }) {
                 <option value="UI Engineer">UI Engineer</option>
                 <option value="UX Engineer">UX Engineer</option>
                 <option value="IT Engineer">IT Engineer</option>
+                <option value="Other">Other</option>
               </select>
+              {showOtherOption && (
+                <div className="mb-4">
+                  <input
+                    type="text"
+                    id="otherJobTitle"
+                    placeholder="Please specify your job title"
+                    className="shadow appearance-none border rounded w-full py-2 px-3 mt-1 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                    onChange={(e) => setJobTitle(e.target.value)}
+                  />
+                </div>
+              )}
             </div>
 
             <div className="mb-4">
@@ -176,7 +192,7 @@ export default function Home({ apiKey }: { apiKey: string }) {
               <textarea
                 id="jobDescription"
                 placeholder="Job Description"
-                className="shadow appearance-none border rounded w-full py-2 px-3 h-48 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                className="shadow appearance-none border rounded w-full py-2 px-3 h-24 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                 value={jobDescription}
                 onChange={(e) => setJobDescription(e.target.value)}
               />
@@ -192,7 +208,7 @@ export default function Home({ apiKey }: { apiKey: string }) {
               <textarea
                 id="prompt"
                 placeholder="What interests you about this role?"
-                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                className="shadow appearance-none border rounded w-full py-2 px-3 h-24 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                 value={prompt}
                 onChange={(e) => setPrompt(e.target.value)}
               />
@@ -242,7 +258,8 @@ export default function Home({ apiKey }: { apiKey: string }) {
             </div>
           </div>
         </div>
-      </div>
+      </main>
+      <Footer />
     </>
   );
 }
