@@ -103,58 +103,61 @@ export default function Home({ apiKey }: { apiKey: string }) {
             onSubmit={handleSubmit}
             className="bg-white shadow-md rounded px-8 pt-6 pb-8 mx-8 mb-4 md:w-full w-auto"
           >
-            <div className="mb-4">
-              <label
-                htmlFor="jobTitle"
-                className="block text-gray-700 font-bold mb-2"
-              >
-                Job Title:
-              </label>
-              <select
-                id="jobTitle"
-                className="w-full h-10 px-3 text-base placeholder-gray-600 border rounded-lg focus:shadow-outline"
-                onChange={(e) => {
-                  setJobTitle(e.target.value);
-                  setShowOtherOption(e.target.value === "Other");
-                }}
-              >
-                <option value="Frontend Developer">Frontend Developer</option>
-                <option value="Backend Developer">Backend Developer</option>
-                <option value="Fullstack Developer">Fullstack Developer</option>
-                <option value="Software Engineer">Software Engineer</option>
-                <option value="UI Engineer">UI Engineer</option>
-                <option value="UX Engineer">UX Engineer</option>
-                <option value="IT Engineer">IT Engineer</option>
-                <option value="Other">Other</option>
-              </select>
-              {showOtherOption && (
-                <div className="mb-4">
-                  <input
-                    type="text"
-                    id="otherJobTitle"
-                    placeholder="Please specify your job title"
-                    className="shadow appearance-none border rounded w-full py-2 px-3 mt-1 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                    onChange={(e) => setJobTitle(e.target.value)}
-                  />
-                </div>
-              )}
-            </div>
-
-            <div className="mb-4">
-              <label
-                htmlFor="company"
-                className="block text-gray-700 font-bold mb-2"
-              >
-                Company:
-              </label>
-              <input
-                type="text"
-                id="company"
-                placeholder="Company Name"
-                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                value={company}
-                onChange={(e) => setCompany(e.target.value)}
-              />
+            <div className="flex flex-col md:flex-row md:justify-between">
+              <div className="mb-4 lg:w-5/12">
+                <label
+                  htmlFor="jobTitle"
+                  className="block text-gray-700 font-bold mb-2"
+                >
+                  Job Title:
+                </label>
+                <select
+                  id="jobTitle"
+                  className="w-full h-10 px-3 text-base placeholder-gray-600 border rounded-lg focus:shadow-outline"
+                  onChange={(e) => {
+                    setJobTitle(e.target.value);
+                    setShowOtherOption(e.target.value === "Other");
+                  }}
+                >
+                  <option value="Frontend Developer">Frontend Developer</option>
+                  <option value="Backend Developer">Backend Developer</option>
+                  <option value="Fullstack Developer">
+                    Fullstack Developer
+                  </option>
+                  <option value="Software Engineer">Software Engineer</option>
+                  <option value="UI Engineer">UI Engineer</option>
+                  <option value="UX Engineer">UX Engineer</option>
+                  <option value="IT Engineer">IT Engineer</option>
+                  <option value="Other">Other</option>
+                </select>
+                {showOtherOption && (
+                  <div className="mb-4">
+                    <input
+                      type="text"
+                      id="otherJobTitle"
+                      placeholder="Please specify your job title"
+                      className="shadow appearance-none border rounded w-full py-2 px-3 mt-1 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                      onChange={(e) => setJobTitle(e.target.value)}
+                    />
+                  </div>
+                )}
+              </div>
+              <div className="mb-4 lg:w-6/12">
+                <label
+                  htmlFor="company"
+                  className="block text-gray-700 font-bold mb-2"
+                >
+                  Company:
+                </label>
+                <input
+                  type="text"
+                  id="company"
+                  placeholder="Company Name"
+                  className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                  value={company}
+                  onChange={(e) => setCompany(e.target.value)}
+                />
+              </div>
             </div>
 
             <div className="mb-4">
@@ -167,7 +170,7 @@ export default function Home({ apiKey }: { apiKey: string }) {
               <textarea
                 id="jobDescription"
                 placeholder="Job Description"
-                className="shadow appearance-none border rounded w-full py-2 px-3 h-24 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                className="shadow appearance-none border rounded w-full py-2 px-3 h-28 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                 value={jobDescription}
                 onChange={(e) => setJobDescription(e.target.value)}
               />
