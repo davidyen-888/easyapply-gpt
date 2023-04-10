@@ -9,7 +9,7 @@ function Footer() {
           Sung-Yan(David) Hsieh
         </a>
         <p className="text-gray-500 text-sm">
-          If you like this project, please consider buying me a coffee!
+          If this tool saves you time, please consider buying me a coffee!
         </p>
         <div className="flex space-x-2 justify-center">
           <a href="https://www.buymeacoffee.com/syhsieh" target="_blank">
