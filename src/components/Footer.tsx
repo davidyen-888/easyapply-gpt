@@ -19,7 +19,7 @@ function Footer() {
               className="mx-auto w-28 h-8 mt-2"
             />
           </a>
-          <a
+          {/* <a
             href="https://github.com/davidyen-888/easyapply-gpt"
             target="_blank"
             className="inline-block mx-auto mt-2"
@@ -30,7 +30,7 @@ function Footer() {
               alt="Github"
               className="mx-auto w-28 h-8"
             />
-          </a>
+          </a> */}
         </div>
       </div>
     </div>

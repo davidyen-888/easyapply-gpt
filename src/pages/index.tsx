@@ -257,7 +257,9 @@ export default function Home({ apiKey }: { apiKey: string }) {
                   id="tokenNumber"
                   className="w-full h-10 px-3 text-base placeholder-gray-600 border rounded-lg focus:shadow-outline"
                   onChange={(e) => setTokenNumber(parseInt(e.target.value))}
+                  value={tokenNumber}
                 >
+                  <option value={50}>50</option>
                   <option value={100}>100</option>
                   <option value={200}>200</option>
                   <option value={300}>300</option>
@@ -308,15 +310,17 @@ export default function Home({ apiKey }: { apiKey: string }) {
                   value={reply}
                 />
               )}
-              {reply && (
-                <button
-                  className="absolute right-0 top-0 mr-10 mt-16 cursor-pointer focus:outline-none"
-                  onClick={handleCopy}
-                >
-                  <MdContentCopy size={24} color="#4A5568" />
-                </button>
-              )}
-              {copied && <p className="text-green-500 text-xs mt-1">Copied!</p>}
+              <div className="flex justify-start content-center mt-4">
+                {reply && (
+                  <button
+                    className="cursor-pointer focus:outline-none"
+                    onClick={handleCopy}
+                  >
+                    <MdContentCopy size={24} color="#4A5568" />
+                  </button>
+                )}
+                {copied && <p className="text-gray-500">Copied!</p>}
+              </div>
             </div>
           </div>
         </div>
